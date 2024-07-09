@@ -1172,3 +1172,53 @@ index parent(parent))
 ALTER TABLE `tabAddress` ADD COLUMN `tax_category` varchar(140), ADD COLUMN `is_your_company_address` int(1) not null default 0
 2024-07-09 13:58:36,400 WARNING database DDL Query made to DB:
 ALTER TABLE `tabContact` ADD COLUMN `is_billing_contact` int(1) not null default 0
+2024-07-09 16:02:32,005 WARNING database DDL Query made to DB:
+create table `tabDemo Doctype` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-09 16:06:42,106 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `first_name` varchar(140)
+2024-07-09 16:44:56,722 WARNING database DDL Query made to DB:
+create table `tabErpNext Doctype 1st` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-09 16:45:56,119 WARNING database DDL Query made to DB:
+ALTER TABLE `tabErpNext Doctype 1st` ADD COLUMN `first_doctype` varchar(140)
+2024-07-09 20:20:23,864 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `attach` text
+2024-07-09 20:26:34,154 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `attachimage` text
+2024-07-09 20:27:40,477 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `barcode` longtext
+2024-07-09 21:02:09,571 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `code` longtext, ADD COLUMN `color` varchar(140), ADD COLUMN `signature` longtext, ADD COLUMN `duration` decimal(21,9)
+2024-07-09 21:02:40,023 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` MODIFY `duration` decimal(21,9)
