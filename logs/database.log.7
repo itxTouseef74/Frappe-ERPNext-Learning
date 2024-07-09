@@ -1,49 +1,3 @@
-2024-07-09 13:55:52,817 WARNING database DDL Query made to DB:
-create table `tabWeb Page` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`title` varchar(140),
-`route` varchar(140) unique,
-`dynamic_route` int(1) not null default 0,
-`published` int(1) not null default 1,
-`module` varchar(140),
-`content_type` varchar(140) default 'Page Builder',
-`slideshow` varchar(140),
-`dynamic_template` int(1) not null default 0,
-`main_section` longtext,
-`main_section_md` longtext,
-`main_section_html` longtext,
-`context_script` longtext,
-`javascript` longtext,
-`insert_style` int(1) not null default 0,
-`text_align` varchar(140),
-`css` longtext,
-`full_width` int(1) not null default 1,
-`show_title` int(1) not null default 0,
-`start_date` datetime(6),
-`end_date` datetime(6),
-`meta_title` varchar(140),
-`meta_description` text,
-`meta_image` text,
-`show_sidebar` int(1) not null default 0,
-`website_sidebar` varchar(140),
-`enable_comments` int(1) not null default 0,
-`header` longtext,
-`breadcrumbs` longtext,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
 2024-07-09 13:55:52,937 WARNING database DDL Query made to DB:
 create table `tabWebsite Theme` (
 			name varchar(140) primary key,
@@ -3281,6 +3235,50 @@ parent varchar(140),
 parentfield varchar(140),
 parenttype varchar(140),
 index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-09 13:56:13,230 WARNING database DDL Query made to DB:
+create table `tabList Filter` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`filter_name` varchar(140),
+`reference_doctype` varchar(140),
+`for_user` varchar(140),
+`filters` longtext,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-09 13:56:13,600 WARNING database DDL Query made to DB:
+create table `tabCustom HTML Block` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`private` int(1) not null default 0,
+`html` longtext,
+`script` longtext,
+`style` longtext,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
 			ENGINE=InnoDB
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4

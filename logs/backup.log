@@ -1,0 +1,6 @@
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240709_180001-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-09 18:00:05.187873
+Config  : ./billa---com/private/backups/20240709_180001-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240709_180001-billa---com-database.sql.gz         810.3KiB
+Backup for Site billa---com has been successfully completed

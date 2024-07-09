@@ -1,26 +1,3 @@
-2024-07-09 13:47:16,270 WARNING database DDL Query made to DB:
-create table `tabClient Script` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`dt` varchar(140),
-`view` varchar(140) default 'Form',
-`module` varchar(140),
-`enabled` int(1) not null default 0,
-`script` longtext,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
 2024-07-09 13:47:16,600 WARNING database DDL Query made to DB:
 create table `tabServer Script` (
 			name varchar(140) primary key,
@@ -3279,6 +3256,29 @@ create table `tabConsole Log` (
 `_comments` text,
 `_assign` text,
 `_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-09 13:47:39,140 WARNING database DDL Query made to DB:
+create table `tabChangelog Feed` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`title` varchar(140),
+`app_name` varchar(140),
+`link` longtext,
+`posting_timestamp` datetime(6),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `posting_timestamp`(`posting_timestamp`),
 index modified(modified))
 			ENGINE=InnoDB
 			ROW_FORMAT=DYNAMIC
