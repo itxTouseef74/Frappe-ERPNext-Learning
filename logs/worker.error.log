@@ -1,0 +1,2144 @@
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/p/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1047, in teardown
+    self.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 624, in unsubscribe
+    self.pubsub.unsubscribe()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1659, in unsubscribe
+    return self.execute_command("UNSUBSCRIBE", *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1479, in execute_command
+    self._execute(connection, connection.send_command, *args, **kwargs)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 847, in send_command
+    self.send_packed_command(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 817, in send_packed_command
+    self.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1046, in teardown
+    self.register_death()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 832, in register_death
+    p.execute()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 2120, in execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 2122, in <lambda>
+    lambda error: self._disconnect_raise_reset(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 2121, in <lambda>
+    lambda: execute(conn, stack, raise_on_error),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1975, in _execute_transaction
+    self.parse_response(connection, "_")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 2060, in parse_response
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    result = Redis.parse_response(self, connection, command_name, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1286, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 874, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+               ^^^^    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 493, in read_response
+lambda error: self._disconnect_raise_connect(conn, error),
+    self.read_from_socket()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:58: DeprecationWarning: The `push_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+  from crypt import crypt as _crypt
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1799, in run
+    pubsub.get_message(ignore_subscribe_messages=True, timeout=sleep_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1690, in get_message
+    response = self.parse_response(block=(timeout is None), timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1542, in parse_response
+    response = self._execute(conn, try_read)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1518, in _execute
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 49, in call_with_retry
+    fail(error)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1520, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1507, in _disconnect_raise_connect
+    raise error
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1519, in <lambda>
+    lambda: command(*args, **kwargs),
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1536, in try_read
+    if not conn.can_read(timeout=timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2024-07-09 14:02:10,763 [Job billa---com/::a0b5a06a-acc5-46a4-8b55-297e64fb48c0]: exception raised while executing (frappe.utils.background_jobs.execute_job)
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1437, in perform_job
+    job.heartbeat(utcnow(), job.success_callback_timeout)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/job.py", line 722, in heartbeat
+    connection.hset(self.key, 'last_heartbeat', utcformat(self.last_heartbeat))
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/commands/core.py", line 4952, in hset
+    return self.execute_command("HSET", name, *items)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1266, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1457, in get_connection
+    connection.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1448, in perform_job
+    job.heartbeat(utcnow(), job.failure_callback_timeout)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/job.py", line 722, in heartbeat
+    connection.hset(self.key, 'last_heartbeat', utcformat(self.last_heartbeat))
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/commands/core.py", line 4952, in hset
+    return self.execute_command("HSET", name, *items)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1266, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1457, in get_connection
+    connection.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+
+/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/connections.py:72: DeprecationWarning: The `pop_connection` function is deprecated. Pass the `connection` explicitly instead.
+  warnings.warn(
+2024-07-09 14:02:10,772 Worker rq:worker:154ca6138bb1450095db295b847520ef: found an unhandled exception, quitting...
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1463, in get_connection
+    if connection.can_read():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 861, in can_read
+    return self._parser.can_read(timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 444, in can_read
+    return self.read_from_socket(timeout=timeout, raise_on_timeout=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 455, in read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 432, in work
+    self.execute_job(job, queue)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1273, in execute_job
+    self.monitor_work_horse(job, queue)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1238, in monitor_work_horse
+    self.set_current_job_working_time(0)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 887, in set_current_job_working_time
+    connection.hset(self.key, 'current_job_working_time', current_job_working_time)
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/commands/core.py", line 4952, in hset
+    return self.execute_command("HSET", name, *items)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 1266, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1467, in get_connection
+    connection.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
+Traceback (most recent call last):
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 699, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 700, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1002, in _connect
+    raise err
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 990, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 114, in <module>
+    main()
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/bench_helper.py", line 20, in main
+    click.Group(commands=commands)(prog_name="bench")
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/apps/frappe/frappe/commands/scheduler.py", line 202, in start_worker
+    start_worker(
+  File "/home/billa/frappe-bench/apps/frappe/frappe/utils/background_jobs.py", line 296, in start_worker
+    worker.work(
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 456, in work
+    self.teardown()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 1046, in teardown
+    self.register_death()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/rq/worker.py", line 832, in register_death
+    p.execute()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/client.py", line 2114, in execute
+    conn = self.connection_pool.get_connection("MULTI", self.shard_hint)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 1457, in get_connection
+    connection.connect()
+  File "/home/billa/frappe-bench/env/lib/python3.11/site-packages/redis/connection.py", line 705, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:11000. Connection refused.
