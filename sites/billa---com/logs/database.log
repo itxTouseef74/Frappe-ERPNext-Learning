@@ -1222,3 +1222,140 @@ ALTER TABLE `tabDemo Doctype` ADD COLUMN `barcode` longtext
 ALTER TABLE `tabDemo Doctype` ADD COLUMN `code` longtext, ADD COLUMN `color` varchar(140), ADD COLUMN `signature` longtext, ADD COLUMN `duration` decimal(21,9)
 2024-07-09 21:02:40,023 WARNING database DDL Query made to DB:
 ALTER TABLE `tabDemo Doctype` MODIFY `duration` decimal(21,9)
+2024-07-10 17:53:46,040 WARNING database DDL Query made to DB:
+create table `tabProperty Doc` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-10 17:54:30,090 WARNING database DDL Query made to DB:
+ALTER TABLE `tabProperty Doc` ADD COLUMN `first_name` varchar(140), ADD COLUMN `middle_name` varchar(140), ADD COLUMN `last_name` varchar(140)
+2024-07-10 18:42:07,109 WARNING database DDL Query made to DB:
+create table `tabNaming` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-10 18:42:41,070 WARNING database DDL Query made to DB:
+ALTER TABLE `tabNaming` ADD COLUMN `aabc` varchar(140), ADD COLUMN `edf` varchar(140), ADD COLUMN `xyz` varchar(140)
+2024-07-10 18:44:34,258 WARNING database DDL Query made to DB:
+ALTER TABLE `tabNaming` ADD UNIQUE INDEX IF NOT EXISTS aabc (`aabc`)
+2024-07-11 12:21:20,983 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` ADD COLUMN `workflow_state` varchar(140)
+2024-07-11 12:21:21,003 WARNING database DDL Query made to DB:
+ALTER TABLE `tabDemo Doctype` MODIFY `duration` decimal(21,9)
+2024-07-11 12:27:51,708 WARNING database DDL Query made to DB:
+create table `tabNormal Doctype` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 12:28:39,217 WARNING database DDL Query made to DB:
+ALTER TABLE `tabNormal Doctype` ADD COLUMN `no` varchar(140), ADD COLUMN `rm` varchar(140), ADD COLUMN `al` varchar(140)
+2024-07-11 12:29:46,457 WARNING database DDL Query made to DB:
+create table `tabSubmitable` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`amended_from` varchar(140),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 12:55:18,318 WARNING database DDL Query made to DB:
+create table `tabClient Side scripting` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`amended_from` varchar(140),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 12:57:28,450 WARNING database DDL Query made to DB:
+ALTER TABLE `tabClient Side scripting` ADD COLUMN `enable` int(1) not null default 0, ADD COLUMN `first_nmae` varchar(140), ADD COLUMN `last_name` varchar(140), ADD COLUMN `full_name` varchar(140), ADD COLUMN `phone` varchar(140)
+2024-07-11 12:59:11,195 WARNING database DDL Query made to DB:
+ALTER TABLE `tabClient Side scripting` ADD COLUMN `family_members` varchar(140)
+2024-07-11 12:59:51,278 WARNING database DDL Query made to DB:
+create table `tabFamily member` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			parent varchar(140),
+parentfield varchar(140),
+parenttype varchar(140),
+index parent(parent))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 13:00:44,324 WARNING database DDL Query made to DB:
+alter table `tabFamily member` add column if not exists parent varchar(140)
+2024-07-11 13:00:44,326 WARNING database DDL Query made to DB:
+alter table `tabFamily member` add column if not exists parenttype varchar(140)
+2024-07-11 13:00:44,327 WARNING database DDL Query made to DB:
+alter table `tabFamily member` add column if not exists parentfield varchar(140)
+2024-07-11 13:00:44,536 WARNING database DDL Query made to DB:
+ALTER TABLE `tabFamily member` ADD COLUMN `name1` varchar(140), ADD COLUMN `age` int(11) not null default 0, ADD COLUMN `relation` varchar(140)
+2024-07-11 13:04:56,762 WARNING database DDL Query made to DB:
+ALTER TABLE `tabClient Side scripting` ADD COLUMN `age` int(11) not null default 0
