@@ -185,3 +185,5 @@ alter table `tabFamily member` add column if not exists parentfield varchar(140)
 ALTER TABLE `tabFamily member` ADD COLUMN `name1` varchar(140), ADD COLUMN `age` int(11) not null default 0, ADD COLUMN `relation` varchar(140)
 2024-07-11 13:04:56,762 WARNING database DDL Query made to DB:
 ALTER TABLE `tabClient Side scripting` ADD COLUMN `age` int(11) not null default 0
+2024-07-11 14:01:15,226 WARNING database DDL Query made to DB:
+ALTER TABLE `tabClient Side scripting` ADD COLUMN `first_name` varchar(140)
