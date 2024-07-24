@@ -1,0 +1,6 @@
+2024-07-11 15:57:17,016 ERROR frappe New Exception collected in error log
+Site: billa---com/
+Form Dict: {'doctype': 'king', 'with_parent': '1', 'cached_timestamp': '', 'cmd': 'frappe.desk.form.load.getdoctype'}
+2024-07-11 15:57:37,846 ERROR frappe Error while inserting deferred Error Log record: Error Log qiiilo0e6p: 'Title' (Module import failed for king, the DocType you're trying to open might be deleted. Error: No module named 'demo.programming_module.doctype.king.king') will get truncated, as max characters allowed is 140
+Site: billa---com
+Form Dict: {}

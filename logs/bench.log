@@ -145,3 +145,122 @@
 2024-07-10 18:00:01,876 INFO /usr/local/bin/bench --verbose --site all backup
 2024-07-11 12:00:01,821 INFO /usr/local/bin/bench --verbose --site all backup
 2024-07-11 13:12:43,612 INFO /usr/local/bin/bench start
+2024-07-11 15:56:31,009 INFO /usr/local/bin/bench start
+2024-07-11 15:56:31,671 INFO /usr/local/bin/bench watch
+2024-07-11 15:56:31,687 INFO /usr/local/bin/bench schedule
+2024-07-11 15:56:31,696 INFO /usr/local/bin/bench serve --port 8000
+2024-07-11 15:56:31,765 INFO /usr/local/bin/bench worker
+2024-07-11 18:00:02,040 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-11 20:08:28,058 INFO /usr/local/bin/bench start
+2024-07-11 20:08:28,557 INFO /usr/local/bin/bench serve --port 8000
+2024-07-11 20:08:28,567 INFO /usr/local/bin/bench worker
+2024-07-11 20:08:28,569 INFO /usr/local/bin/bench watch
+2024-07-11 20:08:28,577 INFO /usr/local/bin/bench schedule
+2024-07-11 20:10:55,918 INFO /usr/local/bin/bench start
+2024-07-11 20:10:56,536 INFO /usr/local/bin/bench schedule
+2024-07-11 20:10:56,539 INFO /usr/local/bin/bench worker
+2024-07-11 20:10:56,627 INFO /usr/local/bin/bench serve --port 8000
+2024-07-11 20:10:56,691 INFO /usr/local/bin/bench watch
+2024-07-11 20:11:32,850 INFO /usr/local/bin/bench start
+2024-07-11 20:11:33,447 INFO /usr/local/bin/bench schedule
+2024-07-11 20:11:33,467 INFO /usr/local/bin/bench watch
+2024-07-11 20:11:33,479 INFO /usr/local/bin/bench worker
+2024-07-11 20:11:33,491 INFO /usr/local/bin/bench serve --port 8000
+2024-07-15 18:00:01,760 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-18 15:25:40,277 INFO /usr/local/bin/bench start
+2024-07-18 15:25:40,719 INFO /usr/local/bin/bench watch
+2024-07-18 15:25:40,722 INFO /usr/local/bin/bench schedule
+2024-07-18 15:25:40,727 INFO /usr/local/bin/bench serve --port 8000
+2024-07-18 15:25:40,731 INFO /usr/local/bin/bench worker
+2024-07-18 15:29:41,582 INFO /usr/local/bin/bench new-app movie_tickets
+2024-07-18 15:29:41,595 LOG creating new app movie_tickets
+2024-07-18 15:30:14,184 LOG Installing movie_tickets
+2024-07-18 15:30:14,186 DEBUG cd /home/billa/frappe-bench && /home/billa/frappe-bench/env/bin/python -m pip install --quiet --upgrade -e /home/billa/frappe-bench/apps/movie_tickets 
+2024-07-18 15:30:25,604 DEBUG bench build --app movie_tickets
+2024-07-18 15:30:25,939 INFO /usr/local/bin/bench build --app movie_tickets
+2024-07-18 15:30:30,412 WARNING restart failed: Couldn't find supervisorctl in PATH
+2024-07-18 15:31:53,488 INFO /usr/local/bin/bench new-site movies.localhost
+2024-07-18 15:33:57,024 INFO /usr/local/bin/bench --site movies.localhost install-app movie_tickets
+2024-07-18 15:34:46,508 INFO /usr/local/bin/bench browse movies.localhost --user Administrator
+2024-07-18 15:35:32,649 INFO /usr/local/bin/bench use movies.localhost
+2024-07-18 15:35:40,778 INFO /usr/local/bin/bench start
+2024-07-18 15:36:29,819 INFO /usr/local/bin/bench start
+2024-07-18 15:36:30,228 INFO /usr/local/bin/bench schedule
+2024-07-18 15:36:30,251 INFO /usr/local/bin/bench serve --port 8000
+2024-07-18 15:36:30,281 INFO /usr/local/bin/bench watch
+2024-07-18 15:36:30,331 INFO /usr/local/bin/bench worker
+2024-07-18 15:38:18,120 INFO /usr/local/bin/bench --site movies.localhost install-app movies
+2024-07-18 15:39:10,986 INFO /usr/local/bin/bench browse movies.localhost --user Administrator
+2024-07-18 15:41:04,207 INFO /usr/local/bin/bench start
+2024-07-18 15:41:04,711 INFO /usr/local/bin/bench watch
+2024-07-18 15:41:04,734 INFO /usr/local/bin/bench serve --port 8000
+2024-07-18 15:41:04,773 INFO /usr/local/bin/bench worker
+2024-07-18 15:41:04,908 INFO /usr/local/bin/bench schedule
+2024-07-18 15:55:20,135 INFO /usr/local/bin/bench add-frappe-ui
+2024-07-18 15:56:40,575 INFO /usr/local/bin/bench get-app https://github.com/NagariaHussain/doppio
+2024-07-18 15:56:40,595 LOG Getting doppio
+2024-07-18 15:56:40,596 DEBUG cd ./apps && git clone https://github.com/NagariaHussain/doppio  --depth 1 --origin upstream
+2024-07-18 15:56:42,203 LOG Installing doppio
+2024-07-18 15:56:42,209 DEBUG cd /home/billa/frappe-bench && /home/billa/frappe-bench/env/bin/python -m pip install --quiet --upgrade -e /home/billa/frappe-bench/apps/doppio 
+2024-07-18 15:56:46,555 DEBUG cd /home/billa/frappe-bench/apps/doppio && yarn install --check-files
+2024-07-18 15:56:59,985 DEBUG bench build --app doppio
+2024-07-18 15:57:00,212 INFO /usr/local/bin/bench build --app doppio
+2024-07-18 15:57:03,341 WARNING restart failed: Couldn't find supervisorctl in PATH
+2024-07-18 15:57:36,288 INFO /usr/local/bin/bench add-frappe-ui
+2024-07-18 16:01:41,276 INFO /usr/local/bin/bench start
+2024-07-18 16:01:42,198 INFO /usr/local/bin/bench schedule
+2024-07-18 16:01:42,200 INFO /usr/local/bin/bench watch
+2024-07-18 16:01:42,287 INFO /usr/local/bin/bench serve --port 8000
+2024-07-18 16:01:42,299 INFO /usr/local/bin/bench worker
+2024-07-18 17:55:52,142 INFO /usr/local/bin/bench start
+2024-07-18 17:55:52,711 INFO /usr/local/bin/bench watch
+2024-07-18 17:55:52,719 INFO /usr/local/bin/bench serve --port 8000
+2024-07-18 17:55:52,755 INFO /usr/local/bin/bench worker
+2024-07-18 17:55:52,800 INFO /usr/local/bin/bench schedule
+2024-07-18 18:00:01,578 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-19 13:54:27,222 INFO /usr/local/bin/bench start
+2024-07-19 13:54:29,839 INFO /usr/local/bin/bench serve --port 8000
+2024-07-19 13:54:29,912 INFO /usr/local/bin/bench watch
+2024-07-19 13:54:29,961 INFO /usr/local/bin/bench worker
+2024-07-19 13:54:30,054 INFO /usr/local/bin/bench schedule
+2024-07-19 15:14:10,824 INFO /usr/local/bin/bench start
+2024-07-19 18:00:02,259 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-21 12:00:02,086 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-22 15:17:41,960 INFO /usr/local/bin/bench start
+2024-07-22 15:19:24,425 INFO /usr/local/bin/bench start
+2024-07-22 15:20:56,702 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 16:00:17,825 INFO /usr/local/bin/bench serve --port 9000
+2024-07-22 16:00:28,804 INFO /usr/local/bin/bench serve --port 9003
+2024-07-22 16:02:24,421 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 16:57:40,823 INFO /usr/local/bin/bench use billa---com
+2024-07-22 16:57:45,267 INFO /usr/local/bin/bench start
+2024-07-22 16:58:01,123 INFO /usr/local/bin/bench serve --port 8393
+2024-07-22 17:06:37,176 INFO /usr/local/bin/bench use movie.localhost
+2024-07-22 17:06:54,015 INFO /usr/local/bin/bench use movies.localhost
+2024-07-22 17:06:58,108 INFO /usr/local/bin/bench start
+2024-07-22 17:07:10,739 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 18:00:02,105 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-22 19:19:53,285 INFO /usr/local/bin/bench serve --port 8009
+2024-07-22 19:21:48,234 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 19:41:14,323 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 19:41:20,977 INFO /usr/local/bin/bench serve
+2024-07-22 19:42:01,248 INFO /usr/local/bin/bench start
+2024-07-22 19:42:26,429 INFO /usr/local/bin/bench serve --port 8000
+2024-07-22 19:46:48,014 INFO /usr/local/bin/bench start
+2024-07-22 19:47:02,982 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 13:59:04,395 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 14:00:50,943 INFO /usr/local/bin/bench serve --port 8909
+2024-07-23 14:01:54,754 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 14:07:37,198 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 14:09:25,382 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 14:24:29,896 INFO /usr/local/bin/bench start
+2024-07-23 14:24:45,284 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 17:28:09,066 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 18:00:02,143 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-23 19:54:38,356 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 19:57:54,186 INFO /usr/local/bin/bench serve --port 9000
+2024-07-23 20:01:12,324 INFO /usr/local/bin/bench serve --port 8000
+2024-07-23 20:10:03,708 INFO /usr/local/bin/bench serve --port 9000
+2024-07-23 20:11:53,070 INFO /usr/local/bin/bench serve --port 8000
+2024-07-24 00:00:01,788 INFO /usr/local/bin/bench --verbose --site all backup
+2024-07-24 15:50:33,392 INFO /usr/local/bin/bench serve --port 8000
