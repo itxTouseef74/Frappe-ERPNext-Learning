@@ -1361,3 +1361,91 @@ ALTER TABLE `tabFamily member` ADD COLUMN `name1` varchar(140), ADD COLUMN `age`
 ALTER TABLE `tabClient Side scripting` ADD COLUMN `age` int(11) not null default 0
 2024-07-11 14:01:15,226 WARNING database DDL Query made to DB:
 ALTER TABLE `tabClient Side scripting` ADD COLUMN `first_name` varchar(140)
+2024-07-11 15:24:54,976 WARNING database DDL Query made to DB:
+create table `tabServer side scripting` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`amended_from` varchar(140),
+`enable` int(1) not null default 0,
+`first_nmae` varchar(140),
+`last_name` varchar(140),
+`full_name` varchar(140),
+`phone` varchar(140),
+`age` int(11) not null default 0,
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 15:27:55,720 WARNING database DDL Query made to DB:
+create table `tabServer` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`amended_from` varchar(140),
+`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index `amended_from`(`amended_from`),
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 15:28:31,850 WARNING database DDL Query made to DB:
+ALTER TABLE `tabServer` ADD COLUMN `name1` varchar(140)
+2024-07-11 15:31:22,322 WARNING database DDL Query made to DB:
+ALTER TABLE `tabServer` ADD COLUMN `autocomplete_ansd` varchar(140)
+2024-07-11 15:34:57,629 WARNING database DDL Query made to DB:
+create table `tabdas` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 15:35:31,797 WARNING database DDL Query made to DB:
+create table `tabking` (
+			name varchar(140) primary key,
+			creation datetime(6),
+			modified datetime(6),
+			modified_by varchar(140),
+			owner varchar(140),
+			docstatus int(1) not null default '0',
+			idx int(8) not null default '0',
+			`_user_tags` text,
+`_comments` text,
+`_assign` text,
+`_liked_by` text,
+index modified(modified))
+			ENGINE=InnoDB
+			ROW_FORMAT=DYNAMIC
+			CHARACTER SET=utf8mb4
+			COLLATE=utf8mb4_unicode_ci
+2024-07-11 15:58:14,759 WARNING database DDL Query made to DB:
+ALTER TABLE `tabServer side scripting` ADD COLUMN `first_name` varchar(140)

@@ -16,3 +16,97 @@ Backup Summary for billa---com at 2024-07-11 12:00:11.050782
 Config  : ./billa---com/private/backups/20240711_120003-billa---com-site_config_backup.json 94.0B
 Database: ./billa---com/private/backups/20240711_120003-billa---com-database.sql.gz         837.0KiB
 Backup for Site billa---com has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240711_180002-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-11 18:00:04.754939
+Config  : ./billa---com/private/backups/20240711_180002-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240711_180002-billa---com-database.sql.gz         858.1KiB
+Backup for Site billa---com has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240715_180003-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-15 18:00:09.634844
+Config  : ./billa---com/private/backups/20240715_180003-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240715_180003-billa---com-database.sql.gz         866.4KiB
+Backup for Site billa---com has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240718_180001-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-18 18:00:05.483069
+Config  : ./billa---com/private/backups/20240718_180001-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240718_180001-billa---com-database.sql.gz         854.9KiB
+Backup for Site billa---com has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240718_180005-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-18 18:00:06.303500
+Config  : ./movies.localhost/private/backups/20240718_180005-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240718_180005-movies_localhost-database.sql.gz         218.8KiB
+Backup for Site movies.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240719_180002-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-19 18:00:08.089523
+Config  : ./billa---com/private/backups/20240719_180002-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240719_180002-billa---com-database.sql.gz         859.1KiB
+Backup for Site billa---com has been successfully completed
+File ./movies.localhost/private/backups/20240718_180005-movies_localhost-database.sql.gz is older than 24 hours
+File ./movies.localhost/private/backups/20240718_180005-movies_localhost-site_config_backup.json is older than 24 hours
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240719_180008-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-19 18:00:09.171422
+Config  : ./movies.localhost/private/backups/20240719_180008-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240719_180008-movies_localhost-database.sql.gz         235.4KiB
+Backup for Site movies.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240721_120002-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-21 12:00:05.106532
+Config  : ./billa---com/private/backups/20240721_120002-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240721_120002-billa---com-database.sql.gz         880.6KiB
+Backup for Site billa---com has been successfully completed
+File ./movies.localhost/private/backups/20240719_180008-movies_localhost-site_config_backup.json is older than 24 hours
+File ./movies.localhost/private/backups/20240719_180008-movies_localhost-database.sql.gz is older than 24 hours
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240721_120005-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-21 12:00:05.862211
+Config  : ./movies.localhost/private/backups/20240721_120005-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240721_120005-movies_localhost-database.sql.gz         249.0KiB
+Backup for Site movies.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240722_180003-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-22 18:00:09.791444
+Config  : ./billa---com/private/backups/20240722_180003-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240722_180003-billa---com-database.sql.gz         894.9KiB
+Backup for Site billa---com has been successfully completed
+File ./movies.localhost/private/backups/20240721_120005-movies_localhost-site_config_backup.json is older than 24 hours
+File ./movies.localhost/private/backups/20240721_120005-movies_localhost-database.sql.gz is older than 24 hours
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240722_180009-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-22 18:00:11.736387
+Config  : ./movies.localhost/private/backups/20240722_180009-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240722_180009-movies_localhost-database.sql.gz         260.5KiB
+Backup for Site movies.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240723_180005-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-23 18:00:13.312634
+Config  : ./billa---com/private/backups/20240723_180005-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240723_180005-billa---com-database.sql.gz         902.1KiB
+Backup for Site billa---com has been successfully completed
+File ./movies.localhost/private/backups/20240722_180009-movies_localhost-site_config_backup.json is older than 24 hours
+File ./movies.localhost/private/backups/20240722_180009-movies_localhost-database.sql.gz is older than 24 hours
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240723_180013-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-23 18:00:14.686119
+Config  : ./movies.localhost/private/backups/20240723_180013-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240723_180013-movies_localhost-database.sql.gz         273.2KiB
+Backup for Site movies.localhost has been successfully completed
+set -o pipefail; /usr/bin/mariadb-dump --user=_ad53bcefc3c3449c --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _ad53bcefc3c3449c | /usr/bin/gzip >> ./billa---com/private/backups/20240724_000002-billa---com-database.sql.gz
+
+Backup Summary for billa---com at 2024-07-24 00:00:04.413487
+Config  : ./billa---com/private/backups/20240724_000002-billa---com-site_config_backup.json 94.0B
+Database: ./billa---com/private/backups/20240724_000002-billa---com-database.sql.gz         902.1KiB
+Backup for Site billa---com has been successfully completed
+File ./movies.localhost/private/backups/20240723_180013-movies_localhost-site_config_backup.json is recent
+File ./movies.localhost/private/backups/20240723_180013-movies_localhost-database.sql.gz is recent
+set -o pipefail; /usr/bin/mariadb-dump --user=_c732bb81e31006b2 --host=127.0.0.1 --port=3306 --password=********** --single-transaction --quick --lock-tables=false _c732bb81e31006b2 | /usr/bin/gzip >> ./movies.localhost/private/backups/20240724_000004-movies_localhost-database.sql.gz
+
+Backup Summary for movies.localhost at 2024-07-24 00:00:05.283039
+Config  : ./movies.localhost/private/backups/20240724_000004-movies_localhost-site_config_backup.json 94.0B
+Database: ./movies.localhost/private/backups/20240724_000004-movies_localhost-database.sql.gz         275.0KiB
+Backup for Site movies.localhost has been successfully completed

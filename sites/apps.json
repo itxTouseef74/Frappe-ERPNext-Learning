@@ -27,5 +27,25 @@
         "required": [],
         "idx": 3,
         "version": "0.0.1"
+    },
+    "movie_tickets": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "772debf4df520f12a6847599ba84927bfb0c9059",
+            "branch": "develop"
+        },
+        "required": [],
+        "idx": 4,
+        "version": "0.0.1"
+    },
+    "doppio": {
+        "is_repo": true,
+        "resolution": {
+            "commit_hash": "74553e578ba6467512008d67bece82de34324471",
+            "branch": "master"
+        },
+        "required": [],
+        "idx": 5,
+        "version": "0.0.1"
     }
 }

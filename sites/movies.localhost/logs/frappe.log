@@ -1,0 +1,6 @@
+2024-07-23 15:15:53,562 ERROR frappe New Exception collected in error log
+Site: movies.localhost
+Form Dict: {'doctype': 'Theater Show', 'name': 'c1vld4ookr', 'cmd': 'frappe.client.delete'}
+2024-07-23 15:18:25,869 ERROR frappe New Exception collected in error log
+Site: movies.localhost
+Form Dict: {'doctype': 'Theater Show', 'name': 'c1vld4ookr', 'cmd': 'frappe.client.delete'}
